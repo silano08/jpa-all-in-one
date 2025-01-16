@@ -7,12 +7,14 @@ import com.jpaprac.jpapractice.model.mapper.UserMapper;
 import com.jpaprac.jpapractice.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Profile("mapstruct")
 public class MapStructExampleUserService implements UserService {
 
     @Autowired

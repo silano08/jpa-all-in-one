@@ -4,6 +4,7 @@ import com.jpaprac.jpapractice.model.dto.UserRequestDto;
 import com.jpaprac.jpapractice.model.dto.UserResponseDto;
 import com.jpaprac.jpapractice.service.ModelMapperUserService;
 import com.jpaprac.jpapractice.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +15,8 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(ModelMapperUserService userService) {
+    @Autowired
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
