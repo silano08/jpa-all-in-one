@@ -1,10 +1,10 @@
 package com.jpaprac.jpapractice.controller;
 
-import com.jpaprac.jpapractice.model.entity.Order;
-import com.jpaprac.jpapractice.model.entity.User;
+import com.jpaprac.jpapractice.model.dto.UserRequestDto;
+import com.jpaprac.jpapractice.model.dto.UserResponseDto;
+import com.jpaprac.jpapractice.service.ModelMapperUserService;
 import com.jpaprac.jpapractice.service.UserService;
 import org.springframework.web.bind.annotation.*;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
@@ -14,34 +14,33 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    public UserController(ModelMapperUserService userService) {
         this.userService = userService;
     }
 
+    @GetMapping
+    public List<UserResponseDto> getAllUsers() {
+        return userService.getAllUsers();
+    }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
+    public UserResponseDto getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public UserResponseDto createUser(@RequestBody UserRequestDto userRequestDto) {
+        return userService.createUser(userRequestDto);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
-        return userService.updateUser(id, updatedUser);
+    public UserResponseDto updateUser(@PathVariable Long id, @RequestBody UserRequestDto userRequestDto) {
+        return userService.updateUser(id, userRequestDto);
     }
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-    }
-
-    @GetMapping("/{id}/orders")
-    public List<Order> getUserOrders(@PathVariable Long id) {
-        return userService.getUserOrders(id);
     }
 
 }

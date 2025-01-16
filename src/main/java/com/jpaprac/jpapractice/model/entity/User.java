@@ -1,18 +1,12 @@
 package com.jpaprac.jpapractice.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
-@Setter
-@Getter
+@Data
 public class User {
 
     @Id
