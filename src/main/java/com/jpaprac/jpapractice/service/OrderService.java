@@ -4,6 +4,8 @@ import com.jpaprac.jpapractice.model.entity.Order;
 import com.jpaprac.jpapractice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 @Service
@@ -24,5 +26,11 @@ public class OrderService {
             orderRepository.save(order);
             return null;
         });
+    }
+
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void createOrderInNewTransaction(Order order) {
+        orderRepository.save(order);
     }
 }

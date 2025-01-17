@@ -24,3 +24,9 @@ controller > service에서 dto를 entity에 매핑하기 위한 방법으로는
 
 - 간단한 프로젝트에서는 ModelMapper를 추천
 - 성능이 중요하고 변환이 많다면 MapStruct가 더 적합
+
+
+### 비고
+
+- Spring Boot 3.x 이상에서는 Jakarta JPA(jakarta.persistence.Entity) 사용
+- 이전 버전에서는 **Javax JPA(javax.persistence.Entity)**를 사용

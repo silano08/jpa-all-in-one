@@ -2,11 +2,13 @@ package com.jpaprac.jpapractice.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
 
 @Entity
 @Data
+@BatchSize(size = 10)
 public class User {
 
     @Id
@@ -20,6 +22,7 @@ public class User {
     private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @BatchSize(size = 10)
     private List<Order> orders;
 
     @Embedded
