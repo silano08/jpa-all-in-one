@@ -7,6 +7,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "orders") // 예약어를 피하기 위해 이름 변경
 public class Order {
 
     @Id

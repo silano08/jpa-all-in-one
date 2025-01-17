@@ -2,6 +2,7 @@ package com.jpaprac.jpapractice.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @BatchSize(size = 10)
+@Table(name = "users") // 예약어를 피하기 위해 이름 변경
 public class User {
 
     @Id
@@ -29,4 +31,6 @@ public class User {
     private Address address;
 
     // Getters and Setters
+
+
 }

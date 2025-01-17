@@ -31,7 +31,7 @@ public abstract class UserServiceImpl implements UserService {
     public void processUsersStream() {
         try (Stream<User> userStream = userRepository.findAllByCustomStream()) {
             userStream.forEach(user -> {
-                System.out.println("Processing user: " + user.getName());
+//                System.out.println("Processing user: " + user.getName());
             });
         }
     }
