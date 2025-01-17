@@ -4,7 +4,7 @@ import com.jpaprac.jpapractice.model.dto.UserRequestDto;
 import com.jpaprac.jpapractice.model.dto.UserResponseDto;
 import com.jpaprac.jpapractice.model.entity.User;
 import com.jpaprac.jpapractice.repository.UserRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Profile("modelmapper")
-public class ModelMapperUserService implements UserService {
+public class ModelMapperUserService extends UserServiceImpl {
     @Autowired
     private UserRepository userRepository;
 

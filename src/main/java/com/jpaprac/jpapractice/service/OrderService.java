@@ -1,23 +1,28 @@
 package com.jpaprac.jpapractice.service;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.criteria.*;
+import com.jpaprac.jpapractice.model.entity.Order;
+import com.jpaprac.jpapractice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Service
 public class OrderService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private OrderRepository orderRepository;
 
-    public List<Order> getOrdersByPrice(Double price) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Order> query = cb.createQuery(Order.class);
-        Root<Order> order = query.from(Order.class);
-        query.select(order).where(cb.greaterThan(order.get("price"), price));
-        return entityManager.createQuery(query).getResultList();
+    private PlatformTransactionManager transactionManager;
+
+    public OrderService(OrderRepository orderRepository, PlatformTransactionManager transactionManager) {
+        this.orderRepository = orderRepository;
+        this.transactionManager = transactionManager;
+    }
+
+    public void createOrderWithTransactionTemplate(Order order) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
+        transactionTemplate.execute(status -> {
+            orderRepository.save(order);
+            return null;
+        });
     }
 }
